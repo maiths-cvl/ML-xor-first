@@ -66,7 +66,7 @@ Y = [[0],
      [1],
      [0]]
 
-layer1 = Layer(2, 2, 1)
+layer1 = Layer(2, 2, 1)  
 layer1.forward(X)
 layer2 = Layer(2, 1, 2)
 layer2.forward(layer1.output)
@@ -90,3 +90,5 @@ print("took", tf-td,"s to compute")
 
 for i in layer2.output:
     print(i*100, "%")
+
+print(layer1.weights, layer1.biases, layer2.weights, layer2.biases)
