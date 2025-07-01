@@ -1,4 +1,7 @@
 import numpy as np
+import time
+
+td = time.time()
 
 np.random.seed(0)
 
@@ -70,19 +73,20 @@ layer2.forward(layer1.output)
 layer2.backward(error(layer2.output, Y, d=True))
 layer1.backward(layer2.back)
 
+precision = 99.9 # en pourcentage
 
-for i in range(10000):
+while np.mean(error(layer2.output, Y))>(1-precision)/100**2:
     layer1.forward(X)
     layer2.forward(layer1.output)
 
     layer2.backward(error(layer2.output, Y, d=True))
     layer1.backward(layer2.back)
-    if i % 1000 == 0:
-        #print(layer2.output)
-        pass
 
 layer1.forward(X)
 layer2.forward(layer1.output)
+
+tf = time.time()
+print("took", tf-td,"s to compute")
 
 for i in layer2.output:
     print(i*100, "%")
